@@ -1,0 +1,27 @@
+- name: nginxの起動ユーザーの追加
+  user:
+    name: nginx
+
+- name: install systemd
+  yum:
+    name: systemd
+
+- name: install EPEL
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+- name: nginxのインストール
+  yum:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: nginxのサービススタート
+  systemd:
+    name: nginx
+    enabled: yes
+
+- name: nginx本体の設定ファイルを変更
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf

@@ -9,3 +9,7 @@ services:
   target01:
     build: ./target
     tty: true
+    privileged: true
+    command: /sbin/init
+    ports:
+      - 8999:80

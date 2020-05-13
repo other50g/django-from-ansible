@@ -2,7 +2,9 @@
 FROM amazonlinux:latest
 
 # yumでOpenSSｈサーバをインストールする
-RUN yum -y install openssh-server
+RUN yum update -y && \
+    yum -y install openssh-server && \
+    yum -y install systemd-sysv
 
 # sshd起動時に公開鍵が必要なため、作成
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
@@ -15,6 +17,7 @@ RUN sed -ri 's/^#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/ssh
 RUN echo "root:" | chpasswd
 
 EXPOSE 22
+EXPOSE 80
 
 # sshdを起動
 CMD ["/usr/sbin/sshd", "-D"]

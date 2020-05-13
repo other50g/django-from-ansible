@@ -1,5 +1,4 @@
 - hosts: target
-  tasks:
-    - name: "テスト"
-      shell: |
-        touch hoge
+  name: nginx setup
+  roles:
+    - role: nginx
