@@ -1,4 +1,3 @@
-# Thanks for https://github.com/Naoto92X82V99/docker-ansible/blob/master/docker/target/Dockerfile
 # Amazon EC2
 FROM amazonlinux:latest
 
