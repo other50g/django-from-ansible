@@ -1,0 +1,10 @@
+version: '3'
+service:
+  ansible:
+    context: ./ansible
+    tty: true
+    working_dir: '/var/data'
+    volumes: ./ansible:/var/data
+  target01:
+    context: ./target
+    tty: true
