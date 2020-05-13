@@ -1,10 +1,11 @@
 version: '3'
-service:
+services:
   ansible:
-    context: ./ansible
+    build: ./ansible
     tty: true
     working_dir: '/var/data'
-    volumes: ./ansible:/var/data
+    volumes:
+      - ./ansible:/var/data
   target01:
-    context: ./target
+    build: ./target
     tty: true
