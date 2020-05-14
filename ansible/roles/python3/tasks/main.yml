@@ -1,0 +1,5 @@
+- name: Python3のインストール
+  yum:
+    name: ['python3-devel', 'python3-libs', 'python3-setuptools']
+    state: present
+

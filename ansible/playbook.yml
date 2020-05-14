@@ -7,3 +7,8 @@
   name: postgresql setup
   roles:
     - role: postgresql
+
+- hosts: target
+  name: python3 setup
+  roles:
+    - role: python3
