@@ -16,6 +16,11 @@ $ docker-compose exec ansible bash
 $ ansible-playbook -i inventry.ini playbook.yml
 ```
 
+## ansible
+* [Ansible Documentation](https://docs.ansible.com/)
+* [Ansibleを効果的に使うのに欠かせないPlaybookの基本的な書き方まとめ \(1/2\)：Ansibleで始めるサーバ作業自動化入門（3） \- ＠IT](https://www.atmarkit.co.jp/ait/articles/1607/26/news013.html)
+*
+
 ## ansible + nginx
 * [Ansibleを使ってnginxをインストールする \- Qiita](https://qiita.com/takakuda/items/12d4fa568f71c8e20cef)
 * [Full Example Configuration \| NGINX](https://www.nginx.com/resources/wiki/start/topics/examples/full/)
@@ -28,3 +33,6 @@ $ ansible-playbook -i inventry.ini playbook.yml
 Amazon Linuxを利用しているため、`systemctl`が実行できない`Failed to get D-Bus connection: Operation not permitted`となった。
 docker-compose.ymlに`command: /sbin/init`と記述することによって対応。
 
+## ansible + postgresql
+* [Ansible 2\.7\.4のPlaybookでPostgreSQL 10を導入 \| setup \| OSS Fan](http://ossfan.net/setup/postgresql-44.html)
+* [【Ansible】PostgreSQL 12をAmazon Linux 2にインストールし、Ansible Playbook化する【PostgreSQL】 \- Qiita](https://qiita.com/tmiki/items/00d22edc6a554f61bd04)
