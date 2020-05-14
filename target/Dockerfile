@@ -16,8 +16,12 @@ RUN sed -ri 's/^#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/ssh
 # rootのパスワードを指定
 RUN echo "root:" | chpasswd
 
+# SSHのポート開放
 EXPOSE 22
+# HTTPのポート開放
 EXPOSE 80
+# PostgreSQLのポート開放
+EXPOSE 5432
 
 # sshdを起動
 CMD ["/usr/sbin/sshd", "-D"]
