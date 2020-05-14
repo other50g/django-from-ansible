@@ -2,3 +2,8 @@
   name: nginx setup
   roles:
     - role: nginx
+
+- hosts: target
+  name: postgresql setup
+  roles:
+    - role: postgresql
