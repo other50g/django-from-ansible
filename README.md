@@ -30,9 +30,12 @@ $ ansible-playbook -i inventry.ini playbook.yml
 * [Docker compose \+ CentOS7でFailed to get D\-Bus connection: Operation not permittedが出た場合の対処法 \- Qiita](https://qiita.com/TsukasaGR/items/26b01ca5bd68c2aec251)
 
 ### 苦労したところ
-Amazon Linuxを利用しているため、`systemctl`が実行できない`Failed to get D-Bus connection: Operation not permitted`となった。
+Amazon Linuxを利用しているため、`systemctl`が実行できない`Failed to get D-Bus connection: Operation not permitted`となった。 \\
 docker-compose.ymlに`command: /sbin/init`と記述することによって対応。
 
 ## ansible + postgresql
 * [Ansible 2\.7\.4のPlaybookでPostgreSQL 10を導入 \| setup \| OSS Fan](http://ossfan.net/setup/postgresql-44.html)
 * [【Ansible】PostgreSQL 12をAmazon Linux 2にインストールし、Ansible Playbook化する【PostgreSQL】 \- Qiita](https://qiita.com/tmiki/items/00d22edc6a554f61bd04)
+
+## ansible + python3(Gunicorn)
+* [Nginx \+ Gunicorn \+ Django \+ Aurora \(MySQL\) の本番環境をAnsible Playbookで構成する \- Qiita](https://qiita.com/3244/items/0d2ae54ccaf72a3b3559)
