@@ -1,0 +1,66 @@
+# AmazonLinuxを利用しているため、/etc/redhat-releaseへの依存関係を解決できない
+# nodepsオプションがある rpm を利用する
+- name: PostgreSQLのリポジトリを追加
+  command: rpm -ivh --nodeps https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+  args:
+    creates: /etc/yum.repos.d/pgdg-redhat-all.repo
+    warn: no
+
+- name: pgdg-redhat-all.repoの内部置換
+  replace:
+    dest: /etc/yum.repos.d/pgdg-redhat-all.repo
+    regexp: '\$releasever'
+    replace: '7'
+
+- name: PostgreSQLのインストール
+  yum:
+    name: '{{ packages }}'
+    state: latest
+  vars:
+    packages:
+      - python-psycopg2
+      - postgresql12
+      - postgresql12-server
+
+- name: データベースの初期化
+  command: /usr/pgsql-12/bin/postgresql-12-setup initdb
+  environment:
+    PGSETUP_INITDB_OPTIONS: '--encoding=UTF-8 --locale=C'
+  args:
+    creates: /var/lib/pgsql/12/data/PG_VERSION
+    warn: no
+
+- name: PostgreSQLのサービススタート
+  systemd:
+    name: postgresql-12
+    enabled: yes
+    state: started
+
+- name: PostgreSQLの本体設定ファイルの変更
+  template:
+    src: postgresql.conf.j2
+    dest: /var/lib/pgsql/12/data/postgresql.conf
+  notify: restart postgresql12
+
+- name: PostgreSQLのホストファイルの変更
+  template:
+    src: pg_hba.conf.j2
+    dest: /var/lib/pgsql/12/data/pg_hba.conf
+  notify: restart postgresql12
+
+- name: PostgreSQLのユーザーを作成する
+  become_user: postgres
+  postgresql_user:
+    login_unix_socket:
+    login_user: postgres
+    name: "{{ login_user_name }}"
+    password: "{{ login_user_name }}"
+
+- name: ユーザー名からデータベースの作成
+  become_user: postgres
+  postgresql_db:
+    login_unix_socket:
+    login_user: postgres
+    name: '{{ login_user_name }}'
+    owner: '{{ login_user_name }}'
+    state: present
