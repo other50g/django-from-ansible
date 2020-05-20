@@ -5,6 +5,9 @@ DockerでAnsibleのHostとSlaveを構築し、HostからSlaveに対して以下�
 * gunicorn
 * django
 
+## 構成図
+![構成図イメージ](./drawio/docker.png)
+
 ## Docker + ansible
 * [【Ansible】DockerでAnsibleハンズオン \- Qiita](https://qiita.com/Naoto9282/items/39eeefa5de652b857372)
 * [Naoto92X82V99/docker\-ansible: Dockerを使って、Ansibleにハンズオン](https://github.com/Naoto92X82V99/docker-ansible)
@@ -39,3 +42,7 @@ docker-compose.ymlに`command: /sbin/init`と記述することによって対�
 
 ## ansible + python3(Gunicorn)
 * [Nginx \+ Gunicorn \+ Django \+ Aurora \(MySQL\) の本番環境をAnsible Playbookで構成する \- Qiita](https://qiita.com/3244/items/0d2ae54ccaf72a3b3559)
+
+## django
+* python 3.8.0
+pyenvとvirtualenvを利用すること。
