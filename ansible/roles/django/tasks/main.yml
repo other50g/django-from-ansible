@@ -1,0 +1,30 @@
+- name: install rsync
+  yum:
+    name: rsync
+
+- name: djangoプロジェクトのディレクトリを作成
+  file:
+    group: "{{ service_group }}"
+    mode: 0755
+    owner: "{{ service_user }}"
+    path: "{{ django_project_dest }}"
+    state: directory
+
+- name: djangoプロジェクトのデプロイ
+  synchronize:
+    checksum: yes
+    delete: yes
+    dest: "{{ django_project_dest }}/"
+    recursive: yes
+    src: "{{ django_project_from }}"
+
+- name: djangoプロジェクトの権限の変更
+  file:
+    group: "{{ service_group }}"
+    owner: "{{ service_user}}"
+    path: "{{ django_project_dest }}"
+    recurse: yes
+    state: directory
+
+- name: pip3を用いてrequirements.txtのインストール
+  command: pip3 install -r requirements.txt chdir={{ django_project_dest }}/{{ django_project_name }}

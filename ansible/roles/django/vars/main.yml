@@ -1,0 +1,6 @@
+django_project_name: 'app'
+django_project_from: '/var/data/app'
+django_project_dest: '/var/www'
+
+service_user: nginx
+service_group: nginx
