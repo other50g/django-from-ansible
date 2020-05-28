@@ -45,4 +45,7 @@ docker-compose.ymlに`command: /sbin/init`と記述することによって対�
 
 ## django
 * python 3.8.0
-pyenvとvirtualenvを利用すること。
+    * pyenvとvirtualenvを利用すること。
+* [pyenvのインストール、使い方、pythonのバージョン切り替えできない時の対処法 \- Qiita](https://qiita.com/koooooo/items/b21d87ffe2b56d0c589b)
+* [pip install でSSL証明書関連？のエラー \- Qiita](https://qiita.com/akashixi/items/14d05ddf0a3d1176956c)
+* [pyenv自体をアップデートして"No such file or directory"となった時 \- Qiita](https://qiita.com/74th/items/f7620dc3882656719ab4)
