@@ -6,6 +6,7 @@ services:
     working_dir: '/var/data'
     volumes:
       - ./ansible:/var/data
+      - ./django:/var/data/app
   target01:
     build: ./target
     tty: true
