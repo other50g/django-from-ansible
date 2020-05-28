@@ -12,3 +12,8 @@
   name: python3 setup
   roles:
     - role: python3
+
+- hosts: target
+  name: deploy django
+  roles:
+    - role: django
