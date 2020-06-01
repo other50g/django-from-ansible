@@ -2,8 +2,10 @@
   systemd:
     name: postgresql-12
     state: restarted
+  listen: 'restart postgresql12'
 
 - name: reload postgresql12
   systemd:
     name: postgresql-12
     state: reloaded
+  listen: 'reload postgresql12'
