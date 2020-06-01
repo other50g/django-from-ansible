@@ -42,6 +42,7 @@ docker-compose.ymlに`command: /sbin/init`と記述することによって対�
 
 ## ansible + python3(Gunicorn)
 * [Nginx \+ Gunicorn \+ Django \+ Aurora \(MySQL\) の本番環境をAnsible Playbookで構成する \- Qiita](https://qiita.com/3244/items/0d2ae54ccaf72a3b3559)
+* [NginxとGunicornの接続をソケットからHTTPに変更した \- Qiita](https://qiita.com/3244/items/8cdcfae9d2ee52f2638d)
 
 ## django
 * python 3.8.0
