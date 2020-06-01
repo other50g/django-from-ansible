@@ -2,3 +2,4 @@
   systemd:
     name: nginx
     state: restarted
+  listen: 'nginx configuration changed'

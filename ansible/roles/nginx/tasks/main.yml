@@ -25,7 +25,7 @@
   template:
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
-  notify: restart nginx
+  notify: nginx configuration changed
 
 - name: sites-availableディレクトリの作成
   file:
@@ -36,3 +36,9 @@
   file:
     path: /etc/nginx/sites-enabled
     state: directory
+
+- name: conf.dへsites-enabled.confを移動
+  template:
+    dest: /etc/nginx/conf.d/sites-enabled.conf
+    src: templates/sites-enabled.conf.j2
+  notify: nginx configuration changed
