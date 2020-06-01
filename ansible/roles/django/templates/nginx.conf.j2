@@ -1,0 +1,18 @@
+server {
+    listen       80;
+    server_name  {{ django_project_name }};
+    server_tokens off;
+
+    location / {
+        proxy_pass http://{{ gunicorn_listen_ipaddr }}:{{ gunicorn_listen_port }};  # ソケットから変更
+        proxy_set_header Host               $host;
+        proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host   $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Real-IP          $remote_addr;
+    }
+
+    location /static {
+        alias {{ django_project_dest }}/app/{{ django_project_name }}/static;
+    }
+}

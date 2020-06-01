@@ -1,0 +1,16 @@
+- name: gunicornサービスの再起動
+  systemd:
+    daemon_reload: yes
+    name: 'gunicorn.service'
+    state: restarted
+  listen: 'gunicorn.service unitfile changed'
+
+- name: nginxの再起動
+  systemd:
+    name: nginx
+    state: restarted
+  listen: 'nginx configuration changed'
+
+- name: systemdのtmpfilesの変更
+  command: /usr/bin/systemd-tmpfiles --create
+  listen: 'systemd-tmpfiles changed'

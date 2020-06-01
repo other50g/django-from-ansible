@@ -4,3 +4,8 @@ django_project_dest: '/var/www'
 
 service_user: nginx
 service_group: nginx
+
+gunicorn_run_dir: '/run/gunicorn'
+gunicorn_allowed_ipaddr: '0.0.0.0'
+gunicorn_listen_ipaddr: '127.0.0.1'
+gunicorn_listen_port: 8000

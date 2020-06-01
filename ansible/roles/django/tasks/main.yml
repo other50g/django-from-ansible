@@ -28,3 +28,42 @@
 
 - name: pip3を用いてrequirements.txtのインストール
   command: pip3 install -r requirements.txt chdir={{ django_project_dest }}/{{ django_project_name }}
+
+- name: gunicornサービスのpid設定
+  command: touch {{ gunicorn_run_dir }}/pid
+
+- name: gunicornサービスのpid設定
+  template:
+    dest: '/etc/tmpfiles.d/gunicorn.conf'
+    group: root
+    owner: root
+    src: 'templates/gunicorn.conf.j2'
+  notify: 'systemd-tmpfiles changed'
+
+- name: gunicornサービスのデプロイ
+  template:
+    dest: '/etc/systemd/system/gunicorn.service'
+    group: root
+    owner: root
+    src: 'templates/gunicorn.service.j2'
+  notify: 'gunicorn.service unitfile changed'
+
+- name: gunicornサービスの有効化
+  systemd:
+    enabled: yes
+    name: 'gunicorn.service'
+    state: started
+
+- name: Nginxの仮想サイト設定をavailableに適応する
+  template:
+    dest: '/etc/nginx/sites-available/nginx.{{django_project_name}}.conf'
+    src: 'templates/nginx.conf.j2'
+  notify: 'nginx configuration changed'
+
+- name: availableからenabledに移動する
+  file:
+    dest: '/etc/nginx/sites-enabled/nginx.{{django_project_name}}.conf'
+    src: '/etc/nginx/sites-available/nginx.{{django_project_name}}.conf'
+    state: link
+  notify: 'nginx configuration changed'
+
