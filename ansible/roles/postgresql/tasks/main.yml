@@ -40,13 +40,21 @@
   template:
     src: postgresql.conf.j2
     dest: /var/lib/pgsql/12/data/postgresql.conf
-  notify: restart postgresql12
+
+- name: PostgreSQLのリスタート
+  systemd:
+    name: postgresql-12
+    state: restarted
 
 - name: PostgreSQLのホストファイルの変更
   template:
     src: pg_hba.conf.j2
     dest: /var/lib/pgsql/12/data/pg_hba.conf
-  notify: restart postgresql12
+
+- name: PostgreSQLのリロード
+  systemd:
+    name: postgresql-12
+    state: reloaded
 
 - name: PostgreSQLのユーザーを作成する
   become_user: postgres
