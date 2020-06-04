@@ -30,15 +30,15 @@
   command: pip3 install -r requirements.txt chdir={{ django_project_dest }}/{{ django_project_name }}
 
 - name: gunicornサービスのpid設定
-  command: touch {{ gunicorn_run_dir }}/pid
-
-- name: gunicornサービスのpid設定
   template:
     dest: '/etc/tmpfiles.d/gunicorn.conf'
     group: root
     owner: root
     src: 'templates/gunicorn.conf.j2'
   notify: 'systemd-tmpfiles changed'
+
+- name: systemdのtmpfilesの変更
+  command: /usr/bin/systemd-tmpfiles --create
 
 - name: gunicornサービスのデプロイ
   template:
@@ -47,6 +47,12 @@
     owner: root
     src: 'templates/gunicorn.service.j2'
   notify: 'gunicorn.service unitfile changed'
+
+- name: gunicornサービスの再起動
+  systemd:
+    daemon_reload: yes
+    name: 'gunicorn.service'
+    state: restarted
 
 - name: gunicornサービスの有効化
   systemd:
